@@ -2,21 +2,27 @@
 
 ## Overview
 
-Digital Time Capsule represents an innovative web application designed to facilitate secure file sharing through a unique, time-controlled mechanism. The platform enables users to store and distribute files with advanced privacy controls and temporal access restrictions.
+Digital Time Capsule is an innovative web application leveraging the Walrus Tysky API to provide secure, time-controlled file sharing with advanced privacy mechanisms.
 
 ## Key Features
 
-### 1. Controlled File Access
+### 1. Walrus Tysky API Integration
+- Utilizes robust Tysky API for secure file management
+- Implements advanced encryption and access control
+- Enables sophisticated time-based file release mechanisms
+
+### 2. Controlled File Access
 - Deletion restricted to original Capsule Key holders
 - Granular access management for file recipients
-- Enhanced security through controlled sharing
+- Enhanced security through Tysky API's authentication protocols
 
-### 2. Time-Based File Unlocking
+### 3. Time-Based File Unlocking
 - Precise scheduling of file accessibility
 - Automated time-triggered release mechanism
-- Flexible unlock time configuration
+- Flexible unlock time configuration powered by Tysky API
 
-### 3. Advanced File Management
+### 4. Advanced File Management
 - Automatic deletion upon complete recipient download
 - Seven-day post-unlock file retention policy
 - File size limitation of 2GB per capsule
+- Secure file handling through Tysky API infrastructure
