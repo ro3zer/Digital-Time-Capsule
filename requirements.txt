@@ -2,7 +2,7 @@ Flask
 Flask-Cors
 apscheduler
 requests
-tusclient
+tuspy
 aiohttp
 cachetools
 werkzeug
