@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Time Capsule</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}" />
+    <meta name="apple-mobile-web-app-title" content="Digital Time Capsule" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favicon/pple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='favicon/pple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='favicon/pple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='favicon/pple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='favicon/pple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='favicon/pple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='favicon/pple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='favicon/pple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon/pple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='favicon/ndroid-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='favicon/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/index.css') }}"> 
+</head>
+<body class="text-gray-100">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Main Card -->
+        <div class="glass-card rounded-2xl p-8 mb-8">
+            <div class="flex items-center mb-8">
+                <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                        <!-- 배경 원 -->
+                        <circle cx="16" cy="16" r="15" fill="#1a1a2e"/>
+                        
+                        <!-- 타임캡슐 실루엣 -->
+                        <path d="M16 6 L22 10 L22 22 L16 26 L10 22 L10 10 Z" 
+                              fill="#4F46E5" 
+                              stroke="#7C3AED" 
+                              stroke-width="1"/>
+                        
+                        <!-- 시계 디테일 -->
+                        <circle cx="16" cy="16" r="5" 
+                                fill="none" 
+                                stroke="#ffffff" 
+                                stroke-width="1.5"/>
+                        <line x1="16" y1="16" x2="16" y2="13" 
+                              stroke="#ffffff" 
+                              stroke-width="1.5" 
+                              stroke-linecap="round"/>
+                        <line x1="16" y1="16" x2="19" y2="16" 
+                              stroke="#ffffff" 
+                              stroke-width="1.5" 
+                              stroke-linecap="round"/>
+                        
+                        <!-- 상단 장식 -->
+                        <circle cx="16" cy="7" r="1" fill="#ffffff"/>
+                      </svg>
+                </div>
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 group relative inline-block">
+                    Digital Time Capsule
+                    <div class="absolute z-50 left-1/2 transform -translate-x-1/4 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                        <div class="bg-gray-800 border border-indigo-600 text-white text-base rounded-xl shadow-2xl p-8 w-96 text-center">
+                            <h3 class="font-bold text-lg mb-2 text-indigo-300">Digital Time Capsule Details</h3>
+                            <div class="space-y-3 text-sm">
+                                <p class="text-center">A secure platform for storing and sharing files with controlled access and timed release.</p>
+                                <ul class="list-disc list-inside pl-4 inline-block text-left break-words">
+                                    <li>Deletion requires the original Capsule Key</li>
+                                    <li>Automatic deletion when all recipients download</li>
+                                    <li>Files removed 7 days after unlocking</li>
+                                    <li>Maximum file size: 2GB</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="ml-2 inline-block cursor-pointer group-hover:opacity-80">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </span>
+                </h1>          
+            </div>
+            
+            <!-- Capsule Key Section -->
+            <div class="mb-8">
+                <label class="block text-sm font-medium mb-2">Capsule Key</label>
+                <div class="flex gap-3">
+                    <input type="text" id="userId" 
+                           class="capsule-input flex-1 rounded-lg px-4 py-2 focus:outline-none" 
+                           placeholder="Enter your capsule key">
+                    <button onclick="loadUserFiles()" 
+                            class="btn bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        Check Capsules
+                    </button>
+                </div>
+            </div>
+
+            <!-- Upload Form -->
+            <form id="uploadForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">File to be Capsule</label>
+                    <div class="relative w-full">
+                        <input type="file" id="file" required 
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                            onchange="updateFileName(this)">
+                        <div class="capsule-input w-full rounded-lg px-4 py-2 flex items-center justify-between">
+                            <span id="fileNameDisplay" class="text-gray-400 truncate max-w-[calc(100%-3rem)] overflow-hidden whitespace-nowrap pr-2">Choose a file</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 h-4 w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Unlock Time</label>
+                    <div class="relative">
+                        <div id="datePickerDisplay" class="capsule-input w-full rounded-lg px-4 py-2 flex items-center justify-between cursor-pointer">
+                            <span id="selectedDateText" class="text-gray-400 truncate max-w-[calc(100%-3rem)]">Select Unlock Date and Time</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        
+                        <div id="customDatePicker" class="absolute z-50 w-full bg-gray-800 rounded-lg shadow-2xl hidden mt-2 p-4">
+                            <div class="grid grid-cols-3 gap-2 mb-4">
+                                <select id="monthSelect" class="bg-gray-700 text-white rounded p-2">
+                                    <option value="">Month</option>
+                                    <!-- Months will be populated dynamically -->
+                                </select>
+                                <select id="daySelect" class="bg-gray-700 text-white rounded p-2">
+                                    <option value="">Day</option>
+                                    <!-- Days will be populated dynamically -->
+                                </select>
+                                <select id="yearSelect" class="bg-gray-700 text-white rounded p-2">
+                                    <option value="">Year</option>
+                                    <!-- Years will be populated dynamically -->
+                                </select>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-2">
+                                <select id="hourSelect" class="bg-gray-700 text-white rounded p-2">
+                                    <option value="">Hour</option>
+                                    <!-- Hours will be populated dynamically -->
+                                </select>
+                                <select id="minuteSelect" class="bg-gray-700 text-white rounded p-2">
+                                    <option value="">Minute</option>
+                                    <!-- Minutes will be populated dynamically -->
+                                </select>
+                            </div>
+                            
+                            <input type="hidden" id="unlockDate" name="unlockDate">
+                            
+                            <div class="flex justify-between mt-4">
+                                <button type="button" id="cancelDatePicker" class="bg-gray-600 text-white px-4 py-2 rounded">Cancel</button>
+                                <button type="button" id="confirmDatePicker" class="bg-indigo-600 text-white px-4 py-2 rounded">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Capsule Receipt Key(comma-separated)</label>
+                    <input type="text" id="allowedUsers" 
+                           class="capsule-input w-full rounded-lg px-4 py-2 focus:outline-none"
+                           placeholder="future_reader1, future_reader2">
+                </div>
+
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar">
+                        <div class="progress" id="progress"></div>
+                        <div class="progress-text" id="progressText">0%</div>
+                    </div>
+                </div>
+
+                <button type="submit" 
+                        class="btn w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                    Lock a Time Capsule
+                </button>
+            </form>
+        </div>
+
+        <!-- Error Alert -->
+        <div id="errorAlert" class="hidden bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded-lg mb-4">
+            <span id="errorMessage"></span>
+        </div>
+
+        <!-- Files List -->
+        <div class="glass-card rounded-2xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+                    List of my time capsules
+                </h2>
+                <div class="group relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400 hover:text-white cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div class="absolute z-10 p-4 -mt-2 w-80 bg-gray-800 border border-indigo-600 text-white text-base rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 right-0 origin-top-right pointer-events-none group-hover:pointer-events-auto">
+                        <h3 class="font-bold text-lg mb-2 text-indigo-300">Time Capsule Guidelines</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Deletion is possible only with the original Capsule Key</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
+                                </svg>
+                                <span>File is automatically deleted when all recipients download</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Files are automatically removed 7 days after unlocking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                                </svg>
+                                <span>Maximum upload file size is limited to 2GB</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="fileList" class="space-y-4"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.js"></script>
+    <script src="{{ url_for('static', filename='script/utility.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/date.js') }}"></script>
+</body>
+</html>
