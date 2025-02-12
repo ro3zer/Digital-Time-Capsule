@@ -23,6 +23,36 @@ const showError = (message) => {
     setTimeout(() => errorAlert.classList.add('hidden'), 5000);
 };
 
+function resetDatePickerDisplay() {
+    const selectedDateText = document.getElementById('selectedDateText');
+    const unlockDate = document.getElementById('unlockDate');
+    
+    // Reset text and styling
+    selectedDateText.textContent = 'Select Unlock Date and Time';
+    selectedDateText.classList.remove('text-white');
+    selectedDateText.classList.add('text-gray-400');
+    
+    // Clear hidden input
+    unlockDate.value = '';
+    
+    // Reset dropdowns to current time
+    populateDropdowns(); // date.js에 있는 함수 재사용
+}
+
+function resetFileInput() {
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    fileNameDisplay.textContent = 'Choose a file';
+    fileNameDisplay.classList.remove('text-white');
+    fileNameDisplay.classList.add('text-gray-400');
+}
+
+function resetForm() {
+    const form = document.getElementById('uploadForm');
+    form.reset();
+    resetFileInput();
+    resetDatePickerDisplay();
+}
+
 function startSimulatedProgress() {
     const progress = document.getElementById('progress');
     const progressText = document.getElementById('progressText');
@@ -73,18 +103,24 @@ function completeProgress() {
 }
 
 const formatDate = (dateString) => {
-    // UTC 시간을 Date 객체로 변환
-    const date = new Date(dateString + 'Z');  // 'Z'를 추가하여 UTC임을 명시
+    // 서버에서 받은 문자열을 Date 객체로 변환
+    // YYYY-MM-DD HH:mm:ss 형식을 처리
+    const [datePart, timePart] = dateString.split(' ');
+    const [year, month, day] = datePart.split('-');
+    const [hour, minute] = timePart.split(':');
     
-    // 사용자의 로컬 시간대로 변환하여 표시
-    return date.toLocaleString('ko-KR', {
+    // Date 객체 생성 (월은 0-based이므로 -1)
+    const date = new Date(year, month - 1, day, hour, minute);
+    
+    // 로컬 시간으로 포맷팅
+    return date.toLocaleString('en-GB', {
         year: 'numeric',
-        month: 'long',
-        day: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone // 사용자의 로컬 시간대 사용
-    });
+        hour12: false
+    }).replace(/\//g, '-');
 };
 
 function updateFileName(input) {

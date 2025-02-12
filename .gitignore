@@ -1,0 +1,21 @@
+# 특정 파일 제외
+secret.txt
+config.ini
+*.env
+
+# 특정 폴더 제외
+node_modules/
+.vscode/
+*.log
+
+# 특정 확장자 파일 제외
+*.tmp
+*.swp
+.DS_Store
+
+# 개발 환경 설정 파일
+.idea/
+.venv/
+
+# 설정 파일
+vault_config.json
