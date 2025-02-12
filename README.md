@@ -1,5 +1,7 @@
 ## **Digital Time Capsule 🕰️**
 
+**https://dtimecapsule.xyz/**
+
 ## **Overview**  
 Digital Time Capsule is a web application that enables time-controlled file sharing using the Tysky API on Walrus.  
 
@@ -23,6 +25,3 @@ Digital Time Capsule is a web application that enables time-controlled file shar
 - Auto-deletion after recipient downloads  
 - Seven-day retention period post-unlock  
 - 2GB file size limit per capsule
-
-
-https://dtimecapsule.xyz/
