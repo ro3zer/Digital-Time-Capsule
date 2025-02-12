@@ -147,7 +147,7 @@ class Database:
                             'mime_type': row['mime_type']
                         })
                 except json.JSONDecodeError:
-                    continue  # JSON 파싱 오류 시 해당 파일 건너뛰기
+                    continue  # JSON 파싱 오류 시 해당 캡슐 건너뛰기
             
             return files
 
@@ -317,20 +317,20 @@ async def list_files():
 @error_handler
 async def upload():
     if 'file' not in request.files:
-        raise TimeCapsuleError("파일이 제공되지 않았습니다")
+        raise TimeCapsuleError("Capsule not provided")
 
     if 'user_id' not in request.form:
-        raise TimeCapsuleError("사용자 ID가 필요합니다")
+        raise TimeCapsuleError("Capsule key is required")
 
     file = request.files['file']
     if not file.filename:
-        raise TimeCapsuleError("파일명이 제공되지 않았습니다")
+        raise TimeCapsuleError("Capsule name not provided")
 
     current_user_id = request.form['user_id']
     allowed_users = request.form.get('allowed_users', '')
     
     if not allowed_users:
-        raise TimeCapsuleError("파일 접근 권한을 부여할 사용자를 지정해야 합니다")
+        raise TimeCapsuleError("You must specify which users will be granted capsule access")
     
     # 허용된 사용자 목록 처리 개선
     try:
@@ -345,10 +345,10 @@ async def upload():
         allowed_users_list = list(set(allowed_users_list))
         
         if not allowed_users_list:
-            raise TimeCapsuleError("유효한 사용자 ID가 제공되지 않았습니다")
+            raise TimeCapsuleError("No valid capsule key was provided")
             
     except json.JSONDecodeError:
-        raise TimeCapsuleError("허용된 사용자 목록의 형식이 올바르지 않습니다")
+        raise TimeCapsuleError("The format of the allowed capsule receipt key list is incorrect")
 
     if current_user_id not in allowed_users_list:
         allowed_users_list.append(current_user_id)
@@ -386,11 +386,11 @@ async def upload():
 async def download(file_id: str):
     user_id = request.args.get('user_id')
     if not user_id:
-        raise TimeCapsuleError("캡슐 키가 필요합니다", 401)
+        raise TimeCapsuleError("Capsule key is required", 401)
 
     file = db.get_file(file_id)
     if not file:
-        raise TimeCapsuleError("캡슐을 찾을 수 없습니다", 404)
+        raise TimeCapsuleError("Capsule not found", 404)
 
     try:
         current_date = datetime.now(timezone.utc)
@@ -399,8 +399,8 @@ async def download(file_id: str):
         
         if not file.get('unlocked', False) and current_date < unlock_date:
             return jsonify({
-                'error': '이 캡슐은 아직 잠겨있습니다',
-                'message': f'캡슐은 {unlock_date.strftime("%Y년 %m월 %d일 %H시 %M분")}에 열람 가능합니다.',
+                'error': 'This capsule is still locked',
+                'message': f'This capsule will be available for viewing {unlock_date.strftime("%Y-%m-%d %H:%M")}',
                 'unlock_date': file['unlock_date']
             }), 403
 
@@ -409,19 +409,19 @@ async def download(file_id: str):
             allowed_users = json.loads(allowed_users)
             
         if user_id not in allowed_users:
-            raise TimeCapsuleError("캡슐 접근 권한이 없습니다", 403)
+            raise TimeCapsuleError("You do not have permission to access the capsule", 403)
 
         download_url = f"{Config.TUSKY_API_URL}/files/{file_id}/data"
         headers = {'Api-Key': api_key}
         
         response = requests.get(download_url, headers=headers, stream=True)
         if response.status_code != 200:
-            raise TimeCapsuleError("캡슐 열람에 실패했습니다", response.status_code)
+            raise TimeCapsuleError("Failed to view capsule", response.status_code)
 
         # 다운로드 상태 업데이트 및 삭제 여부 확인
         should_delete = db.check_and_update_download(file_id, user_id)
         
-        # 모든 수신자가 다운로드했다면 파일 삭제 처리
+        # 모든 수신자가 다운로드했다면 캡슐 삭제 처리
         if should_delete:
             async def delete_file():
                 try:
@@ -458,31 +458,31 @@ async def download(file_id: str):
         )
         
     except ValueError as e:
-        raise TimeCapsuleError(f"날짜 형식 오류: {str(e)}", 400)
+        raise TimeCapsuleError(f"date format error: {str(e)}", 400)
     except requests.RequestException as e:
-        raise TimeCapsuleError(f"다운로드 실패: {str(e)}", 500)
+        raise TimeCapsuleError(f"Download failed: {str(e)}", 500)
 
 @app.route('/api/delete/<file_id>', methods=['DELETE'])
 @error_handler
 async def delete_file_route(file_id: str):
     user_id = request.args.get('user_id')
     if not user_id:
-        raise TimeCapsuleError("사용자 ID가 필요합니다", 401)
+        raise TimeCapsuleError("Capsule Key is required", 401)
 
     try:
         file_info = db.get_file(file_id)
         if not file_info:
-            raise TimeCapsuleError("파일을 찾을 수 없습니다", 404)
+            raise TimeCapsuleError("Capsule not found", 404)
 
-        # 업로더 확인
         if file_info.get('uploader_id') != user_id:
-            raise TimeCapsuleError("파일 삭제 권한이 없습니다. 파일은 업로드한 사용자만 삭제할 수 있습니다.", 403)
+            raise TimeCapsuleError("You do not have permission to delete capsules. Capsules can only be deleted by the user who uploaded them.", 403)
 
         headers = {
             'Content-Type': 'application/json',
             'Api-Key': api_key
         }
 
+        # First, try to delete from Tusky storage
         trash_response = requests.patch(
             f"{Config.TUSKY_API_URL}/files/{file_id}",
             headers=headers,
@@ -490,25 +490,38 @@ async def delete_file_route(file_id: str):
         )
 
         if trash_response.status_code != 200:
-            raise TimeCapsuleError("파일을 휴지통으로 이동하는데 실패했습니다", trash_response.status_code)
+            print(f"Tusky deletion failed with status: {trash_response.status_code}")
+            print(f"Response content: {trash_response.text}")
+            raise TimeCapsuleError("Failed to move capsule to trash", trash_response.status_code)
 
+        # Then empty the trash
         delete_response = requests.delete(
             f"{Config.TUSKY_API_URL}/trash",
             headers=headers
         )
 
         if delete_response.status_code not in [200, 204]:
-            raise TimeCapsuleError("휴지통 비우기에 실패했습니다", delete_response.status_code)
+            print(f"Trash emptying failed with status: {delete_response.status_code}")
+            print(f"Response content: {delete_response.text}")
+            raise TimeCapsuleError("Failed to empty trash", delete_response.status_code)
 
-        if db.delete_file(file_id):
-            cache.clear()
-            return jsonify({'success': True})
-        else:
-            raise TimeCapsuleError("데이터베이스에서 파일 삭제에 실패했습니다", 500)
+        # Finally, delete from local database
+        with db.get_connection() as conn:
+            cursor = conn.cursor()
+            # Delete from download_tracking first due to foreign key constraint
+            cursor.execute("DELETE FROM download_tracking WHERE file_id = ?", (file_id,))
+            cursor.execute("DELETE FROM files WHERE id = ?", (file_id,))
+            conn.commit()  # Explicitly commit the transaction
+
+        # Clear the cache after successful deletion
+        cache.clear()
+        
+        return jsonify({'success': True})
 
     except TimeCapsuleError as e:
         raise e
     except Exception as e:
+        print(f"Unexpected error during deletion: {str(e)}")
         raise TimeCapsuleError(str(e), 500)
 
 def check_expired_files():
@@ -516,7 +529,7 @@ def check_expired_files():
         cursor = conn.cursor()
         current_time = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
         
-        # 만료된 파일 조회
+        # 만료된 캡슐 조회
         cursor.execute("""
             SELECT id FROM files 
             WHERE expiry_date < ? 
@@ -531,7 +544,7 @@ def check_expired_files():
                     'Api-Key': api_key
                 }
                 
-                # Tusky API에서 파일 삭제
+                # Tusky API에서 캡슐 삭제
                 trash_response = requests.patch(
                     f"{Config.TUSKY_API_URL}/files/{file_id}",
                     headers=headers,
@@ -544,7 +557,7 @@ def check_expired_files():
                         headers=headers
                     )
                     
-                    # 데이터베이스에서 파일 정보 삭제
+                    # 데이터베이스에서 캡슐 정보 삭제
                     db.delete_file(file_id)
                     cache.clear()
                     print(f"Expired file deleted: {file_id}")
