@@ -112,14 +112,21 @@ class Database:
             ''')
 
     def format_date(self, date_str: str) -> str:
-        """날짜 문자열을 UTC 형식으로 변환"""
         try:
-            # HTML datetime-local의 형식을 파싱하고 UTC로 저장
-            dt = datetime.strptime(date_str, '%Y-%m-%dT%H:%M')
-            return dt.astimezone(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
+            # 명시적으로 UTC 타임존 설정
+            dt = datetime.strptime(date_str, '%Y-%m-%dT%H:%M').replace(tzinfo=timezone.utc)
+            
+            print(f"Original datetime: {dt}")
+            print(f"Datetime timezone: {dt.tzinfo}")
+            
+            # UTC로 변환
+            utc_dt = dt.astimezone(timezone.utc)
+            print(f"UTC datetime: {utc_dt}")
+            
+            return utc_dt.strftime('%Y-%m-%d %H:%M:%S')
         except ValueError:
             return date_str
-
+            
     def get_user_files(self, user_id: str) -> List[Dict[str, Any]]:
         with self.get_connection() as conn:
             conn.row_factory = sqlite3.Row
@@ -310,6 +317,7 @@ async def list_files():
         return jsonify(cache[cache_key])
 
     files = db.get_user_files(user_id)
+    print(files)
     cache[cache_key] = files
     return jsonify(files)
 
@@ -396,11 +404,11 @@ async def download(file_id: str):
         current_date = datetime.now(timezone.utc)
         unlock_date = datetime.strptime(file['unlock_date'], '%Y-%m-%d %H:%M:%S')
         unlock_date = unlock_date.replace(tzinfo=timezone.utc)
-        
+
         if not file.get('unlocked', False) and current_date < unlock_date:
             return jsonify({
                 'error': 'This capsule is still locked',
-                'message': f'This capsule will be available for viewing {unlock_date.strftime("%Y-%m-%d %H:%M")}',
+                'message': f'This capsule will be available for viewing at {unlock_date.strftime("%Y-%m-%d %H:%M")}',
                 'unlock_date': file['unlock_date']
             }), 403
 
