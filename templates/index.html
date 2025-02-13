@@ -64,15 +64,28 @@
                         <circle cx="16" cy="7" r="1" fill="#ffffff"/>
                       </svg>
                 </div>
-                <h1 class="text-2xl sm:text-3xl font-bold text-center sm:text-left bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 group relative inline-block">
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 group relative inline-block">
                     Digital Time Capsule
-                    <!-- 툴팁 컨테이너 -->
-                    <div class="absolute z-50 left-1/2 transform -translate-x-1/2 sm:-translate-x-1/4 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
-                        <div class="bg-gray-800 border border-indigo-600 text-white text-sm sm:text-base rounded-xl shadow-2xl p-4 sm:p-8 w-72 sm:w-96 text-center">
-                            <!-- 툴팁 내용 -->
+                    <div class="absolute z-50 left-1/2 transform -translate-x-1/4 top-full mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
+                        <div class="bg-gray-800 border border-indigo-600 text-white text-base rounded-xl shadow-2xl p-8 w-96 text-center">
+                            <h3 class="font-bold text-lg mb-2 text-indigo-300">Digital Time Capsule Details</h3>
+                            <div class="space-y-3 text-sm">
+                                <p class="text-center">A secure platform for storing and sharing files with controlled access and timed release.</p>
+                                <ul class="list-disc list-inside pl-4 inline-block text-left break-words">
+                                    <li>Deletion requires the original Capsule Key</li>
+                                    <li>Automatic deletion when all recipients download</li>
+                                    <li>Files removed 7 days after unlocking</li>
+                                    <li>Maximum file size: 2GB</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </h1>
+                    <span class="ml-2 inline-block cursor-pointer group-hover:opacity-80">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-400 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </span>
+                </h1>     
             </div>
             
             <!-- Capsule Key Section -->
@@ -188,7 +201,38 @@
                 </h2>
                 <!-- Info Icon with Tooltip -->
                 <div class="group relative">
-                    <!-- SVG and Tooltip content -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-400 hover:text-white cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div class="absolute z-10 p-4 -mt-2 w-80 bg-gray-800 border border-indigo-600 text-white text-base rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 right-0 origin-top-right pointer-events-none group-hover:pointer-events-auto">
+                        <h3 class="font-bold text-lg mb-2 text-indigo-300">Time Capsule Guidelines</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Deletion is possible only with the original Capsule Key</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 015.905-.75 1 1 0 001.937-.5A5.002 5.002 0 0010 2z" />
+                                </svg>
+                                <span>File is automatically deleted when all recipients download</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Files are automatically removed 7 days after unlocking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                                </svg>
+                                <span>Maximum upload file size is limited to 2GB</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div id="fileList" class="space-y-4"></div>
