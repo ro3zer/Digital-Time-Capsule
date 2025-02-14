@@ -2,10 +2,12 @@
 secret.txt
 config.ini
 *.env
+.gitignore
 
 # 특정 폴더 제외
 node_modules/
 .vscode/
+__pycache__/
 *.log
 
 # 특정 확장자 파일 제외
