@@ -22,13 +22,13 @@ if os.name == 'nt':
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 rate_limiter = RateLimiter(
-    requests_per_minute=60,  # 분당 60개 요청 제한
+    requests_per_minute=40,  # 분당 60개 요청 제한
     requests_per_hour=1000   # 시간당 1000개 요청 제한
 )
 
 app = Flask(__name__, static_url_path='', static_folder='static')
 CORS(app)
-cache = TTLCache(maxsize=100, ttl=300)  # 5-minute cache
+cache = TTLCache(maxsize=100, ttl=5)  # 5 sec
 
 VAULT_NAME = "Time Capsule"
 CONFIG_FILE = "vault_config.json"
