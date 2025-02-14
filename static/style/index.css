@@ -1,9 +1,22 @@
+html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     color: #e2e8f0;
-    -webkit-tap-highlight-color: transparent; /* 모바일에서 탭 하이라이트 제거 */
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) fixed;
+    background-size: cover;
 }
 
 .glass-card {
@@ -169,6 +182,12 @@ body {
         left: 50%;
         transform: translateX(-50%);
     }
+
+    #list-div .absolute {
+        width: 185vw;
+        left: 50%;
+        transform: translateX(-50%);
+    }
     
     /* 날짜 선택기 모바일 최적화 */
     #customDatePicker {
@@ -180,6 +199,92 @@ body {
         max-width: 400px;
         z-index: 1000;
         padding: 1.5rem;
+    }
+
+    body {
+        font-size: 14px; /* 기본 텍스트 크기 축소 */
+    }
+
+    #uploadForm svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .text-3xl {
+        font-size: 1.45rem !important; /* Digital Time Capsule 텍스트 */
+    }
+    
+    .text-xl {
+        font-size: 1.2rem !important; /* List of my time capsules 텍스트 */
+    }
+    
+    .text-sm {
+        font-size: 0.85rem !important;
+    }
+    
+    h1, h2{
+        font-size: 90%; /* 헤더 텍스트 크기도 비율로 축소 */
+    }
+    
+    h3 {
+        font-size: 70%;
+    }
+
+    input, select, button {
+        font-size: 14px; /* 입력 요소들의 폰트 크기도 축소 */
+    }
+
+    .space-y-2 {
+        font-size: 80%;
+    }
+
+    #logo-div {
+        width: 32px;
+        height: 32px;
+    }
+
+    #list-div svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .text-3xl {
+        font-size: 1.5rem; /* Digital Time Capsule 텍스트 크기 조절 */
+    }
+
+    .text-3xl #main {
+        width: 20px;
+        height: 20px;
+    }
+
+    .text-xl {
+        font-size: 1rem; /* List of my time capsules 텍스트 크기 조절 */
+    }
+
+    #fileList .btn {
+        padding: 0.25rem 0.5rem !important; /* px-2 py-1 */
+        font-size: 0.75rem; /* text-xs */
+        min-height: 24px;
+    }
+
+    /* 파일명 텍스트 크기 조절 */
+    #fileList .font-medium {
+        font-size: 0.875rem; /* text-sm */
+    }
+
+    /* Unlock Time 텍스트 크기 조절 */
+    #fileList .text-sm {
+        font-size: 0.7rem !important; /* text-xs */
+    }
+
+    /* 버튼 사이 간격 줄이기 */
+    #fileList .space-x-2 > * + * {
+        margin-left: 0.375rem !important;
+    }
+
+    /* 텍스트와 버튼 사이 간격 줄이기 */
+    #fileList .mr-4 {
+        margin-right: 0.75rem !important;
     }
     
     /* 모바일에서 선택 요소 크기 최적화 */
@@ -233,5 +338,105 @@ body {
     
     .file-item {
         animation: none;
+    }
+}
+
+@media (max-width: 330px) {
+    body {
+        font-size: 12px; /* 기본 텍스트 크기 축소 */
+    }
+
+    #uploadForm svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .text-3xl {
+        font-size: 1.25rem !important; /* Digital Time Capsule 텍스트 */
+    }
+    
+    .text-xl {
+        font-size: 1rem !important; /* List of my time capsules 텍스트 */
+    }
+    
+    .text-sm {
+        font-size: 0.75rem !important;
+    }
+    
+    h1, h2{
+        font-size: 80%; /* 헤더 텍스트 크기도 비율로 축소 */
+    }
+    
+    h3 {
+        font-size: 60%;
+    }
+    
+    #fileList .btn {
+        padding: 0.12rem 0.3rem !important; /* px-2 py-1 */
+        font-size: 0.6rem; /* text-xs */
+        min-height: 18px;
+    }
+
+    /* 파일명 텍스트 크기 조절 */
+    #fileList .font-medium {
+        font-size: 0.7rem; /* text-sm */
+    }
+
+    /* Unlock Time 텍스트 크기 조절 */
+    #fileList .text-sm {
+        font-size: 0.5rem !important; /* text-xs */
+    }
+
+    /* 버튼 사이 간격 줄이기 */
+    #fileList .space-x-2 > * + * {
+        margin-left: 0.305rem !important;
+    }
+
+    /* 텍스트와 버튼 사이 간격 줄이기 */
+    #fileList .mr-4 {
+        margin-right: 0.65rem !important;
+    }
+
+    /* .flex.space-x-2 {
+        display:
+    } */
+
+    #list-div .absolute {
+        width: 180vw;
+        left: 30%;
+        transform: translateX(-50%);
+    }
+    
+    input, select, button {
+        font-size: 12px; /* 입력 요소들의 폰트 크기도 축소 */
+    }
+
+    .group .absolute {
+        width: 90vw;
+        left: 30%;
+        transform: translateX(-50%);
+    }
+
+    #logo-div {
+        width: 24px;
+        height: 24px;
+    }
+
+    .text-3xl {
+        font-size: 1.2rem; /* Digital Time Capsule 텍스트 크기 조절 */
+    }
+
+    .text-3xl #main {
+        width: 15px;
+        height: 15px;
+    }
+
+    .text-xl {
+        font-size: 0.6rem; /* List of my time capsules 텍스트 크기 조절 */
+    }
+
+    #list-div svg {
+        width: 14px;
+        height: 14px;
     }
 }
