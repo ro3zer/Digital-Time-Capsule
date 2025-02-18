@@ -133,7 +133,7 @@
                     const errorData = await response.json();
                     if (errorData.unlock_date) {
                         const localTime = formatDate(errorData.unlock_date);
-                        showToast(`This capsule will be available for viewing at ${localTime}`, true);
+                        showToast(`This capsule will be unlocked at ${localTime}`, true);
                     } else {
                         showToast(errorData.message || errorData.error, true);
                     }
