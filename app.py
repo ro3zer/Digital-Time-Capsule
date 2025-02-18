@@ -223,7 +223,7 @@ async def download(file_id: str):
         if not file.get('unlocked', False) and current_date < unlock_date:
             return jsonify({
                 'error': 'This capsule is still locked',
-                'message': f'This capsule will be available for viewing at {unlock_date.strftime("%Y-%m-%d %H:%M")}',
+                'message': f'This capsule will be unlocked at {unlock_date.strftime("%Y-%m-%d %H:%M")}',
                 'unlock_date': file['unlock_date']
             }), 403
 
