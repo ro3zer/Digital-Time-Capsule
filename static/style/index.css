@@ -15,14 +15,27 @@ body {
     color: #e2e8f0;
     -webkit-tap-highlight-color: transparent;
     overflow-x: hidden;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) fixed;
-    background-size: cover;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%) fixed;
+    background-size: 200% 200%;
+    animation: gradientBackground 15s ease infinite;
+}
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Safari 지원 */
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Safari 지원 */
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
@@ -32,17 +45,17 @@ body {
 }
 
 .capsule-input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #fff;
     transition: all 0.3s ease;
     width: 100%; /* 모바일에서 전체 너비 사용 */
 }
 
 .capsule-input:focus {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.8);
     border-color: rgba(99, 102, 241, 0.5);
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
     outline: none; /* 모바일에서 기본 아웃라인 제거 */
@@ -79,16 +92,17 @@ body {
 .progress-bar {
     width: 100%;
     height: 24px;
-    background-color: #e9ecef;
+    background: rgba(15, 23, 42, 0.5);
     border-radius: 12px;
     overflow: hidden;
     position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .progress {
     height: 100%;
     width: 0%;
-    background: linear-gradient(45deg, #007bff, #4895ef);
+    background: linear-gradient(45deg, #4f46e5, #6366f1);
     transition: width 0.5s ease;
     position: absolute;
     top: 0;
@@ -104,7 +118,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2;
-    color: black;
+    color: white;
     font-weight: bold;
 }
 
@@ -127,6 +141,9 @@ body {
 .file-item {
     animation: fadeIn 0.3s ease;
     transition: all 0.3s ease;
+    background: rgba(15, 23, 42, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(99, 102, 241, 0.15);
 }
 
 .btn {
@@ -134,6 +151,13 @@ body {
     position: relative;
     overflow: hidden;
     touch-action: manipulation; /* 터치 동작 최적화 */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 기본 버튼 스타일 (색상이 지정되지 않은 경우) */
+.btn:not([class*="bg-"]) {
+    background: linear-gradient(to right, #4f46e5, #6366f1);
 }
 
 .btn:after {
@@ -184,7 +208,7 @@ body {
     }
 
     #list-div .absolute {
-        width: 185vw;
+        width: 90vw;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -199,6 +223,10 @@ body {
         max-width: 400px;
         z-index: 1000;
         padding: 1.5rem;
+        background: rgba(17, 24, 39, 0.95);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border-radius: 16px;
     }
 
     body {
@@ -324,7 +352,7 @@ body {
     }
     
     .progress-bar {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(15, 23, 42, 0.7);
     }
 }
 
@@ -337,6 +365,10 @@ body {
     }
     
     .file-item {
+        animation: none;
+    }
+    
+    body {
         animation: none;
     }
 }
@@ -397,10 +429,6 @@ body {
         margin-right: 0.65rem !important;
     }
 
-    /* .flex.space-x-2 {
-        display:
-    } */
-
     #list-div .absolute {
         width: 180vw;
         left: 30%;
@@ -439,4 +467,62 @@ body {
         width: 14px;
         height: 14px;
     }
+}
+
+/* 새로운 스타일 추가 - 헤더 그라데이션 */
+h1.text-3xl .bg-gradient-to-r {
+    background: linear-gradient(to right, #a78bfa, #818cf8);
+}
+
+h2.text-xl .bg-gradient-to-r {
+    background: linear-gradient(to right, #a78bfa, #818cf8);
+}
+
+/* 로고 배경 업데이트 */
+#logo-div {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+/* 그린 버튼 스타일 개선 */
+.btn.bg-green-600 {
+    background: linear-gradient(to right, #059669, #10b981);
+    box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+}
+
+.btn.bg-green-600:hover {
+    background: linear-gradient(to right, #047857, #059669);
+    box-shadow: 0 6px 15px rgba(5, 150, 105, 0.4);
+}
+
+/* 커스텀 데이트피커 스타일 개선 */
+#customDatePicker select {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: white;
+    border-radius: 8px;
+    padding: 0.6rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#customDatePicker button {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+#confirmDatePicker {
+    background: linear-gradient(to right, #4f46e5, #6366f1);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+#cancelDatePicker {
+    background: rgba(75, 85, 99, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 파일 목록 아이템 간격 개선 */
+#fileList {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
 }

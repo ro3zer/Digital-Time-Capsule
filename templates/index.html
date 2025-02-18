@@ -36,32 +36,107 @@
         <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-8">
             <div class="flex flex-col sm:flex-row items-center mb-6 sm:mb-8">
                 <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center mb-4 sm:mb-0 sm:mr-4" id="logo-div">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                        <!-- 배경 그라데이션 -->
+                        <defs>
+                          <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4F46E5" />
+                            <stop offset="50%" stop-color="#7C3AED" />
+                            <stop offset="100%" stop-color="#8B5CF6" />
+                          </linearGradient>
+                          <linearGradient id="capsuleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6366F1" />
+                            <stop offset="60%" stop-color="#4F46E5" />
+                            <stop offset="100%" stop-color="#4338CA" />
+                          </linearGradient>
+                          <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="1.5" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                          </filter>
+                          <filter id="innerGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="1" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                          </filter>
+                        </defs>
+                        
                         <!-- 배경 원 -->
-                        <circle cx="16" cy="16" r="15" fill="#1a1a2e"/>
+                        <circle cx="16" cy="16" r="15" fill="url(#bgGradient)"/>
+                        
+                        <!-- 외부 장식 링 -->
+                        <circle cx="16" cy="16" r="14" fill="none" stroke="#A5B4FC" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.6">
+                          <animateTransform 
+                            attributeName="transform" 
+                            type="rotate" 
+                            from="0 16 16" 
+                            to="360 16 16" 
+                            dur="20s" 
+                            repeatCount="indefinite" />
+                        </circle>
                         
                         <!-- 타임캡슐 실루엣 -->
                         <path d="M16 6 L22 10 L22 22 L16 26 L10 22 L10 10 Z" 
-                              fill="#4F46E5" 
-                              stroke="#7C3AED" 
-                              stroke-width="1"/>
+                              fill="url(#capsuleGradient)" 
+                              stroke="#A5B4FC" 
+                              stroke-width="0.5"
+                              filter="url(#glow)" />
                         
                         <!-- 시계 디테일 -->
                         <circle cx="16" cy="16" r="5" 
                                 fill="none" 
                                 stroke="#ffffff" 
-                                stroke-width="1.5"/>
-                        <line x1="16" y1="16" x2="16" y2="13" 
+                                stroke-width="1.5"
+                                opacity="0.9" />
+                        
+                        <!-- 시계 시침 -->
+                        <line x1="16" y1="16" x2="16" y2="12" 
                               stroke="#ffffff" 
                               stroke-width="1.5" 
-                              stroke-linecap="round"/>
+                              stroke-linecap="round">
+                          <animateTransform 
+                            attributeName="transform" 
+                            type="rotate" 
+                            from="0 16 16" 
+                            to="360 16 16" 
+                            dur="60s" 
+                            repeatCount="indefinite" />
+                        </line>
+                        
+                        <!-- 시계 분침 -->
                         <line x1="16" y1="16" x2="19" y2="16" 
                               stroke="#ffffff" 
                               stroke-width="1.5" 
-                              stroke-linecap="round"/>
+                              stroke-linecap="round">
+                          <animateTransform 
+                            attributeName="transform" 
+                            type="rotate" 
+                            from="0 16 16" 
+                            to="360 16 16" 
+                            dur="5s" 
+                            repeatCount="indefinite" />
+                        </line>
                         
                         <!-- 상단 장식 -->
-                        <circle cx="16" cy="7" r="1" fill="#ffffff"/>
+                        <circle cx="16" cy="7" r="1" fill="#ffffff" filter="url(#innerGlow)">
+                          <animate 
+                            attributeName="opacity" 
+                            values="0.7;1;0.7" 
+                            dur="2s" 
+                            repeatCount="indefinite" />
+                        </circle>
+                        
+                        <!-- 빛나는 효과 -->
+                        <circle cx="16" cy="16" r="7" fill="none" stroke="#A5B4FC" stroke-width="0.3" opacity="0.5">
+                          <animate 
+                            attributeName="r" 
+                            values="7;8;7" 
+                            dur="3s" 
+                            repeatCount="indefinite" />
+                          <animate 
+                            attributeName="opacity" 
+                            values="0.5;0.8;0.5" 
+                            dur="3s" 
+                            repeatCount="indefinite" />
+                        </circle>
                       </svg>
                 </div>
                 <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 group relative inline-block">
